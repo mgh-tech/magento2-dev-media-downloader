@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+  Copyright © MGH-tech. All rights reserved.
+  See LICENSE.txt for license details.
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="dev" translate="label" sortOrder="900">
+            <label>Dev Tools</label>
+        </tab>
+        <section id="dev_media_downloader" translate="label" type="text" sortOrder="910" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Dev Media Downloader</label>
+            <tab>dev</tab>
+            <resource>MGH_DevMediaDownloader::config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+                <field id="enabled" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable On-The-Fly Download</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Only active in developer mode. Downloads missing media from the remote base URL once requested.</comment>
+                </field>
+                <field id="remote_base_url" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Remote Base URL</label>
+                    <comment>Example: https://remote.example.com (no trailing slash)</comment>
+                    <validate>validate-url</validate>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

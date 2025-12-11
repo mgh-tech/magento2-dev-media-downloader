@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+  Copyright © MGH-tech. All rights reserved.
+  See LICENSE.txt for license details.
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- compatible with open-mage and magento open source -->
+    <type name="Magento\MediaStorage\App\Media">
+        <plugin name="mgh_dev_media_downloader_plugin"
+                type="MGH\DevMediaDownloader\Plugin\MediaPlugin" sortOrder="10" />
+    </type>
+    <!-- compatible adobe commerce with Fastly media storage -->
+    <type name="Fastly\Cdn\Plugin\MediaStorage\App\AroundMedia">
+        <plugin name="download-file-from-remote-for-dev"
+                type="MGH\DevMediaDownloader\Plugin\FastlyPlugin"
+                sortOrder="10"/>
+    </type>
+</config>

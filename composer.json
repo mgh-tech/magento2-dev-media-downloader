@@ -1,0 +1,24 @@
+{
+    "name": "mgh-tech/magento2-dev-media-downloader",
+    "description": "Magento 2 module for on-demand downloading of missing media files from a remote instance during development.",
+    "type": "magento2-module",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "mgh-tech",
+            "email": "contact@mgh-tech.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "magento/framework": ">=102.0.0",
+        "ext-curl": "*"
+    },
+    "autoload": {
+        "files": [],
+        "psr-4": {
+            "MGH\\DevMediaDownloader\\": ""
+        }
+    }
+}
+

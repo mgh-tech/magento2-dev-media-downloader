@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+  Copyright © MGH-tech. All rights reserved.
+  See LICENSE.txt for license details.
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/config.xsd">
+    <default>
+        <dev_media_downloader>
+            <general>
+                <remote_base_url>https://example.com</remote_base_url>
+            </general>
+        </dev_media_downloader>
+    </default>
+</config>
