@@ -19,6 +19,54 @@ When a media file (e.g., an image in `/pub/media/`) is requested and not found l
 3. If successful, saves it locally for future requests
 4. Serves the file as if it were present from the start
 
+### Workflow Diagram
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    Request for Media File                       │
+│              (e.g., /pub/media/catalog/product/...)             │
+└─────────────────────┬───────────────────────────────────────────┘
+                      │
+                      ▼
+        ┌─────────────────────────────┐
+        │  File exists locally?       │
+        └─────────────────────────────┘
+               │           │
+            YES│           │NO
+               │           │
+               │      ┌────▼────────────────────────────┐
+               │      │ Module enabled & in dev mode?   │
+               │      └────────┬────────────────────────┘
+               │              │
+               │            NO│ → Serve 404 or default
+               │              │
+               │            YES│
+               │      ┌───────▼──────────────────────┐
+               │      │ Build remote URL candidates  │
+               │      │ (handle cache paths, etc.)   │
+               │      └───────┬──────────────────────┘
+               │              │
+               │      ┌───────▼──────────────────────┐
+               │      │ Try to download from remote  │
+               │      │ (validate image type, etc.)  │
+               │      └───────┬──────────────────────┘
+               │              │
+               │        ┌─────┴──────┐
+               │      SUCCESS       FAIL
+               │        │            │
+               │    ┌───▼──────┐     └──→ Log error, serve 404
+               │    │ Save file│
+               │    │ locally  │
+               │    └───┬──────┘
+               │        │
+               └────┬───┘
+                    │
+                    ▼
+          ┌──────────────────────┐
+          │  Serve file to client│
+          └──────────────────────┘
+```
+
 ## Key Features
 
 - **Seamless on-demand downloading** of missing media files from a remote Magento instance
@@ -91,54 +139,6 @@ Remote Base URL: https://production.example.com
 Enable: Yes
 ```
 
-### Workflow Diagram
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                    Request for Media File                       │
-│              (e.g., /pub/media/catalog/product/...)             │
-└─────────────────────┬───────────────────────────────────────────┘
-                      │
-                      ▼
-        ┌─────────────────────────────┐
-        │    File exists locally?     │
-        └─────────────────────────────┘
-               │           │
-            YES│           │NO
-               │           │
-               │      ┌────▼────────────────────────────┐
-               │      │ Module enabled & in dev mode?   │
-               │      └────────┬────────────────────────┘
-               │              │
-               │            NO│ → Serve 404 or default
-               │              │
-               │            YES│
-               │      ┌───────▼──────────────────────┐
-               │      │ Build remote URL candidates  │
-               │      │ (handle cache paths, etc.)   │
-               │      └───────┬──────────────────────┘
-               │              │
-               │      ┌───────▼──────────────────────┐
-               │      │ Try to download from remote  │
-               │      │ (validate image type, etc.)  │
-               │      └───────┬──────────────────────┘
-               │              │
-               │        ┌─────┴──────┐
-               │      SUCCESS       FAIL
-               │        │            │
-               │    ┌───▼──────┐     └──→ Log error, serve 404
-               │    │ Save file│
-               │    │ locally  │
-               │    └───┬──────┘
-               │        │
-               └────┬───┘
-                    │
-                    ▼
-          ┌──────────────────────┐
-          │ Serve file to client │
-          └──────────────────────┘
-```
-
 ## Requirements
 
 - **PHP** >= 7.4
@@ -163,5 +163,4 @@ GitHub: [github.com/mgh-tech](https://github.com/mgh-tech)
 ## Support & Contributions
 
 For issues, questions, or contributions, please visit the [GitHub repository](https://github.com/mgh-tech/magento2-dev-media-downloader).
-
 

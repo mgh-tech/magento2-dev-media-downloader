@@ -15,6 +15,7 @@ use Magento\Framework\Filesystem\Io\File;
 use Magento\Framework\HTTP\Client\Curl;
 use MGH\DevMediaDownloader\Model\Config;
 use Psr\Log\LoggerInterface;
+use Throwable;
 
 class MediaPlugin
 {
@@ -36,7 +37,7 @@ class MediaPlugin
             $pathInfo = $this->request->getPathInfo();
             if (str_starts_with($pathInfo, '/media/')) {
                 $mediaPath = BP . '/pub' . $pathInfo;
-                if (!file_exists($mediaPath)) {
+                if (!$this->fileExists($mediaPath)) {
                     $remoteBase = $this->config->getRemoteBaseUrl();
                     if ($remoteBase) {
                         $this->attemptDownload($remoteBase, $pathInfo, $mediaPath);
@@ -48,7 +49,12 @@ class MediaPlugin
         return $proceed();
     }
 
-    private function attemptDownload(string $remoteBase, string $pathInfo, string $mediaPath): void
+    protected function fileExists(string $path): bool
+    {
+        return file_exists($path);
+    }
+
+    protected function attemptDownload(string $remoteBase, string $pathInfo, string $mediaPath): void
     {
         $candidates = $this->buildRemoteCandidates($remoteBase, $pathInfo);
         $downloaded = false;
@@ -68,7 +74,7 @@ class MediaPlugin
                     'target' => $mediaPath
                 ]);
                 break; // Writing failed; abort further attempts
-            } catch (\Throwable $t) {
+            } catch (Throwable $t) {
                 $this->logger->debug('DevMediaDownloader fetch failed', [
                     'exception' => $t->getMessage(),
                     'url' => $remoteUrl

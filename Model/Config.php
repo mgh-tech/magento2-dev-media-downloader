@@ -19,14 +19,16 @@ class Config
 
     public function __construct(
         private readonly ScopeConfigInterface $scopeConfig,
-        private readonly AppState $appState
+        private readonly AppState $appState,
+        private readonly ?string $sapi = null
     ) {
     }
 
     public function isEnabled(): bool
     {
         $enabled = false;
-        if (PHP_SAPI !== 'cli') {
+        $sapi = $this->sapi ?? PHP_SAPI;
+        if ($sapi !== 'cli') {
             try {
                 $inDevMode = ($this->appState->getMode() === AppState::MODE_DEVELOPER);
             } catch (\Exception $e) {
