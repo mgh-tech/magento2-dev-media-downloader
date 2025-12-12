@@ -1,4 +1,5 @@
-# MGH\DevMediaDownloader
+# MGH DevMediaDownloader
+[![Latest Stable Version](http://poser.pugx.org/mgh-tech/magento2-dev-media-downloader/v)](https://packagist.org/packages/mgh-tech/magento2-dev-media-downloader) [![Total Downloads](http://poser.pugx.org/mgh-tech/magento2-dev-media-downloader/downloads)](https://packagist.org/packages/mgh-tech/magento2-dev-media-downloader) [![Latest Unstable Version](http://poser.pugx.org/mgh-tech/magento2-dev-media-downloader/v/unstable)](https://packagist.org/packages/mgh-tech/magento2-dev-media-downloader) [![License](http://poser.pugx.org/mgh-tech/magento2-dev-media-downloader/license)](https://packagist.org/packages/mgh-tech/magento2-dev-media-downloader) [![PHP Version Require](http://poser.pugx.org/mgh-tech/magento2-dev-media-downloader/require/php)](https://packagist.org/packages/mgh-tech/magento2-dev-media-downloader)
 
 A lightweight Magento 2 module for on-demand downloading of missing media files from a remote instance during development and testing.
 
