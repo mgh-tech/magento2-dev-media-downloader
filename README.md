@@ -7,7 +7,7 @@ A lightweight Magento 2 module for on-demand downloading of missing media files 
 
 **MGH\DevMediaDownloader** streamlines development and testing workflows by automatically downloading missing media files (such as product images) from a remote Magento instance. This module is designed for development, staging, or CI environments where the full media library is not available locally, but is accessible from a production or reference server.
 
-See video : https://gitdiagram.com/mgh-tech/magento2-dev-media-downloader/video
+[![Watch a one-minute video tour of magento2-dev-media-downloader](https://gitdiagram.com/video-badge.svg)](https://gitdiagram.com/mgh-tech/magento2-dev-media-downloader/video)
 ## Problem & Solution
 
 Working with a local development environment often means missing large media files. Rather than synchronizing entire media folders, this module intelligently fetches media assets on-demand from your remote instance, improving both developer experience and CI/CD efficiency.
